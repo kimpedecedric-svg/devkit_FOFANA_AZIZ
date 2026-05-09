@@ -16,14 +16,14 @@ from devkit.utils.display import console
 
 app = typer.Typer(
     name="devkit",
-    help="[bold cyan]devkit[/bold cyan] — AI-powered developer toolkit (gh · Copilot · Gemini)",
+    help="[bold cyan]devkit[/bold cyan] — AI-powered developer toolkit (gh · Gemini)",
     rich_markup_mode="rich",
     no_args_is_help=False,
 )
 
 # Register sub-apps
 app.add_typer(github.app, name="gh", help="GitHub operations (issues, PRs, branches…)")
-app.add_typer(ai.app, name="ai", help="AI tools — Copilot CLI & Gemini CLI")
+app.add_typer(ai.app, name="ai", help="AI tools — Gemini CLI")
 app.add_typer(workflow.app, name="workflow", help="End-to-end developer workflows")
 
 
@@ -38,7 +38,7 @@ def _show_welcome() -> None:
     console.print(
         Panel(
             "[bold cyan]devkit[/bold cyan]  v0.1.0\n"
-            "[dim]AI-powered developer toolkit — gh · Copilot · Gemini[/dim]",
+            "[dim]AI-powered developer toolkit — gh · Gemini[/dim]",
             border_style="cyan",
             expand=False,
         )

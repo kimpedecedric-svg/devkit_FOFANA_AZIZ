@@ -11,10 +11,10 @@ REQUIRED_TOOLS: dict[str, str] = {
     "bat": "brew install bat  |  apt install bat",
     "delta": "brew install git-delta",
     "git": "Install from https://git-scm.com",
+    "gemini": "npm install -g @google/gemini-cli  then set GEMINI_API_KEY",
 }
 
 OPTIONAL_TOOLS: dict[str, str] = {
-    "gemini": "npm install -g @google/generative-ai-cli",
     "asciinema": "brew install asciinema  |  pip install asciinema",
 }
 

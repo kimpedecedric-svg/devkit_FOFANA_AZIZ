@@ -1,10 +1,8 @@
 # devkit
 
-> AI-powered developer CLI toolkit — **gh · GitHub Copilot CLI · Gemini**
+> AI-powered developer CLI toolkit — **gh · Gemini**
 
-`devkit` is a Python CLI meta-tool that orchestrates GitHub CLI, Copilot CLI, and Gemini into
-a seamless, opinionated developer workflow. One command to start a feature, review a PR with AI,
-generate a commit message, or run your daily standup.
+`devkit` est un meta-tool CLI Python qui orchestre GitHub CLI et Gemini CLI en un workflow développeur fluide et cohérent.
 
 ---
 
@@ -26,16 +24,16 @@ devkit --help
 | Tool | Install |
 |------|---------|
 | `gh` | https://cli.github.com |
-| `fzf` | `brew install fzf` or `apt install fzf` |
-| `bat` | `brew install bat` or `apt install bat` |
+| `fzf` | `brew install fzf` ou `apt install fzf` |
+| `bat` | `brew install bat` ou `apt install bat` |
 | `delta` | `brew install git-delta` |
-| `gemini` | `npm install -g @google/generative-ai-cli` |
-| `gh copilot` | `gh extension install github/gh-copilot` |
+| `gemini` | `npm install -g @google/gemini-cli` |
 
-Authenticate:
+Authentification :
 ```bash
 gh auth login
-gemini auth     # Google account
+# Puis créer une clé sur https://aistudio.google.com/apikey
+mkdir -p ~/.gemini && echo 'GEMINI_API_KEY=ta_clé' >> ~/.gemini/.env
 ```
 
 ---
@@ -69,26 +67,26 @@ devkit gh run-status
 
 ---
 
-### `devkit ai` — AI tools
+### `devkit ai` — AI tools (Gemini)
 
 ```bash
-# Explain a shell command (Copilot CLI)
+# Expliquer une commande shell
 devkit ai explain "find . -name '*.py' -mtime -7 | xargs wc -l"
 
-# Suggest a command from natural language (Copilot CLI)
-devkit ai suggest "list all docker containers sorted by memory usage"
-devkit ai suggest --target git "undo last commit but keep changes staged"
-devkit ai suggest --target gh  "create a release from the latest tag"
+# Suggérer une commande depuis du langage naturel
+devkit ai suggest "lister tous les containers docker triés par mémoire"
+devkit ai suggest --target git "annuler le dernier commit en gardant les changements"
+devkit ai suggest --target gh  "créer une release depuis le dernier tag"
 
-# AI code review of a PR (Gemini)
+# Review IA d'une PR
 devkit ai review 42
 
-# Generate a commit message from staged changes (Gemini)
+# Générer un commit message depuis les changements stagés
 git add -p
 devkit ai commit
 
-# Ask anything
-devkit ai ask "What is the difference between rebase and merge?"
+# Question libre
+devkit ai ask "Quelle est la différence entre rebase et merge ?"
 ```
 
 ---
