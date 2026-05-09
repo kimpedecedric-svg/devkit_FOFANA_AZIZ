@@ -60,7 +60,18 @@ def feature_start(
     except subprocess.CalledProcessError:
         console.print("[warning]⚠  Could not push branch (no remote?)[/warning]")
 
-    # 3. Create draft PR
+    # 3. Commit vide pour permettre la création de la PR (GitHub l'exige)
+    try:
+        subprocess.run(
+            ["git", "commit", "--allow-empty", "-m", f"chore: init feature/{name}"],
+            check=True, capture_output=True,
+        )
+        subprocess.run(["git", "push"], check=True, capture_output=True)
+        console.print(f"[success]\u2713[/success] Initial commit pushed")
+    except subprocess.CalledProcessError:
+        pass  # non bloquant
+
+    # 4. Create draft PR
     pr_title = name.replace("-", " ").title()
     pr_body = f"Closes #{issue}" if issue else ""
     try:
