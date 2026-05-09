@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "devkit"
+version = "0.1.0"
+description = "AI-powered developer CLI toolkit — gh + Copilot + Gemini"
+authors = [{ name = "devkit" }]
+requires-python = ">=3.11"
+dependencies = [
+    "typer[all]>=0.12",
+    "rich>=13",
+]
+
+[project.scripts]
+devkit = "devkit.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
