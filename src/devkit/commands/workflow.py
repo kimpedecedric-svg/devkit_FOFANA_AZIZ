@@ -22,15 +22,7 @@ app = typer.Typer(help="End-to-end developer workflows")
 
 def _gemini(prompt: str) -> str:
     import subprocess as sp
-    r = sp.run(["gemini", prompt], capture_output=True, text=True)
-    return r.stdout.strip() or r.stderr.strip() or "(no output)"
-
-
-def _copilot_suggest(task: str) -> str:
-    r = subprocess.run(
-        ["gh", "copilot", "suggest", "--target", "git", task],
-        capture_output=True, text=True,
-    )
+    r = sp.run(["gemini", "-p", prompt], capture_output=True, text=True)
     return r.stdout.strip() or r.stderr.strip() or "(no output)"
 
 
@@ -101,12 +93,10 @@ def feature_start(
         with Progress(SpinnerColumn(), TextColumn("{task.description}"),
                       console=console) as p:
             p.add_task(f"Generating AI plan with {ai_tool}…")
-            if ai_tool == "gemini" and tool_available("gemini"):
+            if tool_available("gemini"):
                 plan = _gemini(prompt)
-            elif tool_available("gh"):
-                plan = _copilot_suggest(f"implementation plan for: {name}")
             else:
-                plan = "(AI tools not available — skipped)"
+                plan = "(gemini not available — install: npm install -g @google/gemini-cli)"
 
         ai_panel(plan, title="AI Implementation Plan", tool=ai_tool)
 
